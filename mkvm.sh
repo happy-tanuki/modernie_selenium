@@ -579,6 +579,20 @@ activate_vm() {
   execute_os_specific ex_activate_vm
 }
 
+update_ip() {
+  # Create a hosts file
+  if [ $(uname) == "Darwin" ]
+  then
+    # This makes sense on a mac
+    ifconfig ${nic_bridge} | grep "inet " | awk '{print $2 " hubhost"}' > /tmp/hosts
+  else
+    # This works on Ubuntu
+    ifconfig ${nic_bridge} | grep "inet " | awk '{print $2 " hubhost"}' | sed 's/addr://' > /tmp/hosts
+  fi
+  # Send it to the VM
+  copyto hosts /tmp/ "C:/Windows/System32/drivers/etc/"
+}
+
 get_vm_info
 import_vm
 set_network_config
@@ -595,6 +609,10 @@ install_chrome
 install_selenium
 configure_clipboard
 activate_vm
+
+if [ "${update_ip}" = "True" ]; then
+  update_ip
+fi
 
 if [ "${create_snapshot}" = "True" ]; then
   shutdown_vm "${vm_name}"
