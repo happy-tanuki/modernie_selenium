@@ -312,7 +312,7 @@ disable_firewall() {
 
 # Create C:\Temp\; Most Functions who copy files to the VM are relying on this folder and will fail is he doesn't exists.
 create_temp_path() {
-  vm_temp="C:\\Temp\\"
+  vm_temp="C:/Temp/"
   log "Creating ${vm_temp}..."
   execute "VBoxManage guestcontrol \"${vm_name}\" createdirectory \"${vm_temp}\" --username 'IEUser' --password 'Passw0rd!'"
   chk fatal $? "Could not create ${vm_temp}"
@@ -323,12 +323,12 @@ set_ie_config() {
   log "Apply IE Protected-Mode Settings..."
   #execute "VBoxManage guestcontrol \"${vm_name}\" copyto \"${ie_protectedmode_reg}\" "${vm_temp}" --username 'IEUser' --password 'Passw0rd!'"
   copyto "${ie_protectedmode_reg}" "$tools_path" "$vm_temp"
-  execute "VBoxManage guestcontrol \"${vm_name}\" execute --image 'C:\\Windows\\Regedit.exe' --username 'IEUser' --password 'Passw0rd!' -- /s '${vm_temp}ie_protectedmode.reg'"
+  execute "VBoxManage guestcontrol \"${vm_name}\" execute --image 'C:/Windows/Regedit.exe' --username 'IEUser' --password 'Passw0rd!' -- /s '${vm_temp}ie_protectedmode.reg'"
   chk error $? "Could not apply IE Protected-Mode-Settings"
   log "Disabling IE-Cache..."
   #execute "VBoxManage guestcontrol \"${vm_name}\" copyto \"${ie_cache_reg}\" "${vm_temp}" --username 'IEUser' --password 'Passw0rd!'"
   copyto ie_disablecache.reg "${tools_path}" "${vm_temp}"
-  execute "VBoxManage guestcontrol \"${vm_name}\" execute --image 'C:\\Windows\\Regedit.exe' --username 'IEUser' --password 'Passw0rd!' -- /s '${vm_temp}ie_disablecache.reg'"
+  execute "VBoxManage guestcontrol \"${vm_name}\" execute --image 'C:/Windows/Regedit.exe' --username 'IEUser' --password 'Passw0rd!' -- /s '${vm_temp}ie_disablecache.reg'"
   chk error $? "Could not disable IE-Cache"
 }
 
@@ -423,7 +423,7 @@ ie11_driver_reg() {
     copyto ie11_win32.reg "${tools_path}" "${vm_temp}"
     chk skip $? "Could not copy ie11_win32.reg"
     log "Setting ie11_win32.reg..."
-    execute "VBoxManage guestcontrol \"${vm_name}\" execute --image 'C:\\Windows\\Regedit.exe' --username 'IEUser' --password 'Passw0rd!' -- /s '${vm_temp}ie11_win32.reg'"
+    execute "VBoxManage guestcontrol \"${vm_name}\" execute --image 'C:/Windows/Regedit.exe' --username 'IEUser' --password 'Passw0rd!' -- /s '${vm_temp}ie11_win32.reg'"
     chk skip $? "Could not set ie11_win32.reg"
   fi
 }
