@@ -40,18 +40,18 @@ VMs/IE8\ -\ Win7.ova:
 
 
 Tools/selenium_conf/selenium-server-standalone.jar:
-	curl -o Tools/selenium_conf/selenium-server-standalone.jar -L http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
+	curl -o Tools/selenium_conf/selenium-server-standalone.jar -L http://selenium-release.storage.googleapis.com/2.46/selenium-server-standalone-2.46.0.jar
 
 Tools/deuac.iso:
 	curl -o Tools/deuac.iso -L https://github.com/tka/SeleniumBox/blob/master/deuac.iso?raw=true
 
 Tools/selenium_conf/IEDriverServer.exe:
-	curl -o Tools/selenium_conf/IEDriverServer.zip -L http://selenium-release.storage.googleapis.com/2.44/IEDriverServer_Win32_2.44.0.zip
-	#curl -o Tools/selenium_conf/IEDriverServer.zip -L http://selenium-release.storage.googleapis.com/2.44/IEDriverServer_x64_2.44.0.zip
+	curl -o Tools/selenium_conf/IEDriverServer.zip -L http://selenium-release.storage.googleapis.com/2.46/IEDriverServer_Win32_2.46.0.zip
+	#curl -o Tools/selenium_conf/IEDriverServer.zip -L http://selenium-release.storage.googleapis.com/2.46/IEDriverServer_x64_2.46.0.zip
 	cd Tools/selenium_conf && unzip IEDriverServer.zip
 
 Tools/selenium_conf/chromedriver.exe:
-	curl -o Tools/selenium_conf/chromedriver.zip -L http://chromedriver.storage.googleapis.com/2.15/chromedriver_win32.zip
+	curl -o Tools/selenium_conf/chromedriver.zip -L http://chromedriver.storage.googleapis.com/2.16/chromedriver_win32.zip
 	cd Tools/selenium_conf && unzip chromedriver.zip
 
 Tools/jre-windows-i586.exe:
@@ -59,7 +59,7 @@ Tools/jre-windows-i586.exe:
 	test -f $(ls jre*.exe|head -n 1) && mv jre-*-windows-i586.exe $@
 
 Tools/firefox.exe:
-	curl -o $@ -L "https://download.mozilla.org/?product=firefox-34.0.5-SSL&os=win&lang=en-GB"
+	curl -o $@ -L "https://download.mozilla.org/?product=firefox-38.0.5-SSL&os=win&lang=en-GB"
 
 Tools/chrome.exe:
 	echo "You may need to download chrome for windows from https://www.google.com/chrome/browser/desktop/index.html?standalone=1"
